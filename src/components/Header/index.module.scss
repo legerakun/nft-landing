@@ -1,0 +1,123 @@
+@use "@/globals.scss" as *;
+
+$header-padding-x: 97px;
+$header-padding-y: 17px;
+$header-tablet-padding-x: 67px;
+$header-tablet-padding-y: 14px;
+
+$button-padding-x: 20px;
+$button-padding-y: 8px;
+$button-tablet-padding-x: 15px;
+$button-tablet-padding-y: 8px;
+
+$connect-button-padding-y: 25px;
+$connect-button-padding-x: 16px;
+$connect-button-tablet-padding-x: 16px;
+$connect-button-tablet-padding-y: 12px;
+
+.header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  width: calc(100% - 2 * $header-padding-x);
+  height: calc($header-height - 2 * $header-padding-y);
+  background: $color-main;
+  align-items: center;
+  padding: $header-padding-y $header-padding-x;
+  gap: 66px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 1;
+  transition: background 0.3s ease;
+
+  @media screen and (max-width: 1440px) {
+    width: calc(100% - 2 * $header-tablet-padding-x);
+    height: calc($header-tablet-height - 2 * $header-tablet-padding-y);
+    padding: $header-tablet-padding-y $header-tablet-padding-x;
+    gap: 25px;
+  }
+}
+
+.showBackground {
+  background: white;
+}
+
+.logoLink {
+  height: 53px;
+  width: 53px;
+
+  @media screen and (max-width: 1440px) {
+    height: 38px;
+    width: 38px;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+
+  @media screen and (max-width: 1440px) {
+    gap: 5px;
+  }
+}
+
+.links button {
+  font-family: $font-inter;
+  font-weight: 500;
+  font-size: 18px;
+  padding: $button-padding-y $button-padding-x;
+  line-height: 26.74px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: $color-gray-heavy;
+  border-radius: 10px;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  @media screen and (max-width: 1440px) {
+    height: 38px;
+    font-size: 14px;
+    line-height: 16px;
+    padding: $button-tablet-padding-y $button-tablet-padding-x;
+  }
+}
+
+.links button:hover {
+  background: $color-contrast-dark;
+  color: black;
+}
+
+.connectWalletButton {
+  background: $color-contrast;
+  padding: $connect-button-padding-y $connect-button-padding-x;
+  margin-left: auto;
+  font-family: $font-inter;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: white;
+  border-radius: 16px;
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: background 0.3s ease, color 0.3s ease;
+
+  @media screen and (max-width: 1440px) {
+    padding: $connect-button-tablet-padding-y $connect-button-tablet-padding-x;
+    font-size: 11.5px;
+    line-height: 17.25px;
+  }
+}
+
+.connectWalletButton:hover {
+  color: black;
+  background: $color-contrast-second;
+}

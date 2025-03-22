@@ -1,0 +1,59 @@
+@use "@/globals.scss" as *;
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 697px;
+
+  @media screen and (max-width: 1440px) {
+    height: 539px;
+  }
+}
+
+.separator {
+  position: absolute;
+  top: 97px;
+  left: 97px;
+  width: 195px;
+  opacity: 0.2;
+  border-top: 1px solid #201f1f;
+  color: $color-contrast;
+
+  @media screen and (max-width: 1440px) {
+    width: 138px;
+    top: 61px;
+    left: 67px;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 148.65px;
+  right: 183.03px;
+  opacity: 0;
+  transition: opacity 1.3s ease;
+
+  @media screen and (max-width: 1440px) {
+    top: 90.65px;
+    right: 130.03px;
+  }
+}
+
+.arrowShow {
+  opacity: 1;
+}
+
+.dots {
+  position: absolute;
+  width: 173px;
+  height: 399.6469421386719px;
+  top: 98.65px;
+  right: -53px;
+
+  @media screen and (max-width: 1440px) {
+    width: 123.31590270996094px;
+    height: 284.2256164550781px;
+    top: 52.65px;
+    right: -38px;
+  }
+}

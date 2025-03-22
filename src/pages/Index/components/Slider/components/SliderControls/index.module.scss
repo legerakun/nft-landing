@@ -1,0 +1,57 @@
+@use "@/globals.scss" as *;
+
+$slider-controller-padding-x: 28px;
+$slider-controller-padding-y: 20px;
+$slider-controller-tablet-padding-x: 21px;
+$slider-controller-tablet-padding-y: 15px;
+
+.sliderController {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-self: center;
+  justify-content: center;
+  width: calc(166px - 2 * $slider-controller-padding-x);
+  height: calc(64px - 2 * $slider-controller-padding-y);
+  border-radius: 17.25px;
+  padding: $slider-controller-padding-y $slider-controller-padding-x;
+  background: $color-white;
+  box-shadow: 0px 43.12px 34.49px -25.87px #0f0f0f1f;
+  
+  @media screen and (max-width: 1440px) {
+    gap: 22px;
+    width: calc(124px - 2 * $slider-controller-tablet-padding-x);
+    height: calc(48px - 2 * $slider-controller-tablet-padding-y);
+    border-radius: 12.94px;
+    padding: $slider-controller-tablet-padding-y
+      $slider-controller-tablet-padding-x;
+    box-shadow: 0px 32.34px 25.87px -19.4px #0f0f0f1f;
+  }
+}
+
+.hr {
+  width: 0px;
+  height: 24px;
+  border: none;
+  border-left: solid 2.16px #e6e8ec;
+
+  @media screen and (max-width: 1440px) {
+    height: 18px;
+    border-left: solid 1.62px #e6e8ec;
+  }
+}
+
+.left,
+.right {
+  transition: background 0.3s ease;
+  border-radius: 3px;
+}
+
+.left:hover,
+.right:hover {
+  background: $color-contrast-second;
+}
+
+.right img {
+  rotate: 180deg;
+}

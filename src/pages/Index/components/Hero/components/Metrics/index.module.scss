@@ -1,0 +1,58 @@
+@use "@/globals.scss" as *;
+
+.metrics {
+  position: absolute;
+  top: 545px;
+  left: 97px;
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  
+  @media screen and (max-width: 1440px) {
+    gap: 40px;
+    top: 378px;
+    left: 67px;
+  }
+}
+
+.showMetrics {
+  opacity: 1;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.metric h2 {
+  font-family: $font-public-sans;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: $color-contrast;
+
+  @media screen and (max-width: 1440px) {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+
+.metric h5 {
+  font-family: $font-inter;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #848586;
+
+  @media screen and (max-width: 1440px) {
+    font-size: 9px;
+    line-height: 13px;
+  }
+}

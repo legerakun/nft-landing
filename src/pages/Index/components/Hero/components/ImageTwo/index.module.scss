@@ -1,0 +1,67 @@
+$image-width: 320px;
+$image-height: 322px;
+$image-tablet-width: 230px;
+$image-tablet-height: 230px;
+
+$back-image-width: 315px;
+$back-image-height: 318px;
+$back-tablet-image-width: 230px;
+$back-tablet-image-height: 230px;
+
+.imageTwo {
+  position: absolute;
+  top: 288.65px;
+  right: calc(0px - $image-width);
+  display: flex;
+  width: $image-width;
+  height: 343px;
+  transition: right 1s ease;
+
+  @media screen and (max-width: 1440px) {
+    top: 194.65px;
+    width: $image-tablet-width;
+    right: calc(0px - $image-tablet-width);
+  }
+}
+
+.inPosition {
+  right: -24px;
+}
+
+.backImage {
+  position: absolute;
+  left: 0;
+  top: 35.74px;
+  width: $back-image-width;
+  height: $back-image-height;
+  min-width: $back-image-width;
+  min-height: $back-image-height;
+  opacity: 0.7;
+  filter: blur(67.50955200195312px);
+
+  @media screen and (max-width: 1440px) {
+    width: $back-tablet-image-width;
+    height: $back-tablet-image-height;
+    min-width: $back-tablet-image-width;
+    min-height: $back-tablet-image-height;
+  }
+}
+
+.image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: $image-width;
+  height: $image-height;
+  min-width: $image-width;
+  min-height: $image-height;
+  border-radius: 22px;
+
+  @media screen and (max-width: 1440px) {
+    width: $back-tablet-image-width;
+    height: $back-tablet-image-height;
+    min-width: $back-tablet-image-width;
+    min-height: $back-tablet-image-height;
+    border-radius: 16px;
+  }
+}
