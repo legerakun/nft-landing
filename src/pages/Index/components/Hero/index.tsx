@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { ImageOne } from "@/pages/Index/components/Hero/components/ImageOne";
 import { ImageTwo } from "@/pages/Index/components/Hero/components/ImageTwo";
 import { Buttons } from "@/pages/Index/components/Hero/components/Buttons";
 import { Metrics } from "@/pages/Index/components/Hero/components/Metrics";
 import { Text } from "@/pages/Index/components/Hero/components/Text";
+import { handleImageSize } from "@/utils/handleImageSize";
 import { imagePath, ImageSizes } from "@/config";
 
 import s from "./index.module.scss";
@@ -27,29 +28,19 @@ export const Hero = () => {
   const [dotsImage, setDotsImage] = useState(dotsSizes[ImageSizes.DESKTOP]);
   const imgRef = useRef(ImageSizes.DESKTOP);
 
+  const resizeListenerCallback = useMemo(
+    () =>
+      handleImageSize(imgRef, (newSize) => {
+        setArrowImage(arrowSizes[newSize]);
+        setDotsImage(dotsSizes[newSize]);
+      }),
+    []
+  );
+
   useEffect(() => {
     setTimeout(() => {
       setShowArrow(true);
     }, 1300);
-
-    const resizeListenerCallback = () => {
-      const { innerWidth } = window;
-
-      const handleImageSize = (newSize: ImageSizes) => {
-        if (imgRef.current === newSize) return;
-        imgRef.current = newSize;
-        setArrowImage(arrowSizes[newSize]);
-        setDotsImage(dotsSizes[newSize]);
-      };
-
-      if (innerWidth > 1440) {
-        handleImageSize(ImageSizes.DESKTOP);
-      } else if (innerWidth > 1024) {
-        handleImageSize(ImageSizes.TABLET);
-      } else if (innerWidth > 375) {
-        handleImageSize(ImageSizes.MOBILE);
-      }
-    };
 
     resizeListenerCallback();
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   maxNftTimer,
@@ -6,6 +6,7 @@ import {
 } from "@/pages/Index/components/Slider/config";
 import { converSecondsToTime } from "@/utils/converSecondsToTime";
 import { cryptoImages, CryptoTypes, ImageSizes } from "@/config";
+import { handleImageSize } from "@/utils/handleImageSize";
 import { getRandomInt } from "@/utils/getRandomInt";
 
 import s from "./index.module.scss";
@@ -26,43 +27,35 @@ export const Slide = ({
   href,
 }: SlideProps) => {
   const cryptoImageSizes = cryptoImages[cryptoType];
-  const [timer, setTimer] = useState(getRandomInt(minNftTimer, maxNftTimer));
+  const [counter, setCounter] = useState(
+    getRandomInt(minNftTimer, maxNftTimer)
+  );
   const [cryptoImage, setCryptoImage] = useState(
     cryptoImageSizes[ImageSizes.DESKTOP]
   );
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const counterRef = useRef<NodeJS.Timeout | null>(null);
   const imgRef = useRef(ImageSizes.DESKTOP);
 
-  useEffect(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
+  const resizeListenerCallback = useMemo(
+    () =>
+      handleImageSize(imgRef, (newSize) => {
+        setCryptoImage(cryptoImageSizes[newSize]);
+      }),
+    []
+  );
 
-      timerRef.current = null;
+  useEffect(() => {
+    if (counterRef.current) {
+      clearInterval(counterRef.current);
+
+      counterRef.current = null;
     }
 
-    const counter = setTimeout(() => {
-      setTimer((old) => old - 1);
+    const counter = setInterval(() => {
+      setCounter((old) => old - 1);
     }, 1000);
 
-    timerRef.current = counter;
-
-    const resizeListenerCallback = () => {
-      const { innerWidth } = window;
-
-      const handleImageSize = (newSize: ImageSizes) => {
-        if (imgRef.current === newSize) return;
-        imgRef.current = newSize;
-        setCryptoImage(cryptoImageSizes[newSize]);
-      };
-
-      if (innerWidth > 1440) {
-        handleImageSize(ImageSizes.DESKTOP);
-      } else if (innerWidth > 1024) {
-        handleImageSize(ImageSizes.TABLET);
-      } else if (innerWidth > 375) {
-        handleImageSize(ImageSizes.MOBILE);
-      }
-    };
+    counterRef.current = counter;
 
     resizeListenerCallback();
 
@@ -71,7 +64,7 @@ export const Slide = ({
     return () => {
       window.removeEventListener("rezise", resizeListenerCallback);
     };
-  });
+  }, []);
 
   const handlePlaceBid = () => {
     console.log(`Navigate to ${href}`);
@@ -82,7 +75,7 @@ export const Slide = ({
       <div className={s.imageContainter}>
         <img className={s.image} src={imagePath} alt={`Slide ${name}`} />
         <label className={s.timer}>
-          <p>{converSecondsToTime(timer)}</p>
+          <p>{converSecondsToTime(counter)}</p>
         </label>
       </div>
       <h3 className={s.name}>{name}</h3>

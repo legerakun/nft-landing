@@ -1,6 +1,7 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { SwiperRef } from "swiper/react";
 
+import { handleImageSize } from "@/utils/handleImageSize";
 import { imagePath, ImageSizes } from "@/config";
 
 import s from "./index.module.scss";
@@ -19,25 +20,15 @@ export const SliderController = ({ swiperRef }: SliderControllerProps) => {
   const [arrowImage, setArrowImage] = useState(arrowSizes[ImageSizes.DESKTOP]);
   const imgRef = useRef(ImageSizes.DESKTOP);
 
-  useEffect(() => {
-    const resizeListenerCallback = () => {
-      const { innerWidth } = window;
-
-      const handleImageSize = (newSize: ImageSizes) => {
-        if (imgRef.current === newSize) return;
-        imgRef.current = newSize;
+  const resizeListenerCallback = useMemo(
+    () =>
+      handleImageSize(imgRef, (newSize) => {
         setArrowImage(arrowSizes[newSize]);
-      };
+      }),
+    []
+  );
 
-      if (innerWidth > 1440) {
-        handleImageSize(ImageSizes.DESKTOP);
-      } else if (innerWidth > 1024) {
-        handleImageSize(ImageSizes.TABLET);
-      } else if (innerWidth > 375) {
-        handleImageSize(ImageSizes.MOBILE);
-      }
-    };
-
+  useEffect(() => {
     resizeListenerCallback();
 
     window.addEventListener("resize", resizeListenerCallback);
