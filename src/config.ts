@@ -24,8 +24,8 @@ export const cryptoImages = {
   },
 };
 
-export enum Layout {
-  DESKTOP = 1440,
-  TABLET = 1024,
-  MOBILE = 375,
-}
+export const LayoutSizes = {
+  [LayoutNames.DESKTOP]: 1440,
+  [LayoutNames.TABLET]: 1024,
+  [LayoutNames.MOBILE]: 375,
+};
