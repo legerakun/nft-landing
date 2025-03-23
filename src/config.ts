@@ -5,7 +5,7 @@ export enum CryptoTypes {
   ETH = "ETH",
 }
 
-export enum ImageSizes {
+export enum LayoutNames {
   DESKTOP = "desktop",
   TABLET = "tablet",
   MOBILE = "mobile",
