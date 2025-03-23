@@ -24,4 +24,8 @@ export const cryptoImages = {
   },
 };
 
-export const maxResolution = 1440;
+export enum Layout {
+  DESKTOP = 1440,
+  TABLET = 1024,
+  MOBILE = 375,
+}

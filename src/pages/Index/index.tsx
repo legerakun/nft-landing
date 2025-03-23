@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Slider } from "@/pages/Index/components/Slider";
 import { Banner } from "@/pages/Index/components/Banner";
 import { Hero } from "@/pages/Index/components/Hero";
-import { maxResolution } from "@/config";
+import { Layout } from "@/config";
 
 export const Index = () => {
   useEffect(() => {
@@ -16,7 +16,7 @@ export const Index = () => {
 
       if (innerWidth < 1440) return;
 
-      const scale = innerWidth / maxResolution;
+      const scale = innerWidth / Layout.DESKTOP;
 
       root.style.zoom = scale.toString();
     };
