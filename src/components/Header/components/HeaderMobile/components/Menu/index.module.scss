@@ -14,12 +14,13 @@ $menu-padding-y: 40px;
   padding: 0px $menu-padding-x;
   height: 0%;
   background: $color-main;
-  transition: height 1s ease;
+  transition: height 1s ease, padding 1s ease;
 }
 
 .navigation {
   display: flex;
   flex-direction: column;
+  justify-content: start;
   gap: 20px;
   height: 0px;
   opacity: 0;
@@ -27,6 +28,7 @@ $menu-padding-y: 40px;
 }
 
 .navigation li {
+  width: 100%;
   height: 0%;
   opacity: 0;
   transition: opacity 1s ease, height 1s ease;
@@ -38,9 +40,11 @@ $menu-padding-y: 40px;
   font-size: 0px;
   line-height: 0px;
   letter-spacing: 0%;
+  width: 100%;
+  text-align: left;
   text-transform: uppercase;
   color: $color-gray-heavy;
-  transition: opacity 1s ease, height 1s ease, font-size 1s ease, line-height 1s ease;
+  transition: font-size 0s ease 1s, line-height 0s ease 1s;
 }
 
 .menuOpened {
@@ -61,6 +65,7 @@ $menu-padding-y: 40px;
 .menuOpened .navigation button {
   font-size: 40px;
   line-height: 42px;
+  transition: line-height 1s ease;
 }
 
 .socials {
@@ -71,21 +76,23 @@ $menu-padding-y: 40px;
   width: 100%;
   height: 0px;
   opacity: 0;
-  transition: opacity 1s ease, height 1s ease;
+  transition: opacity 0s ease 1s, height 0s ease 1s;
 }
 
 .socials img {
   height: 0px;
-  transition: opacity 1s ease, height 1s ease;
+  transition: height 0.3s ease;
 }
 
 .menuOpened .socials {
   height: 24px;
   opacity: 1;
+  transition: opacity 1s ease, height 0s ease 1s;
 }
 
 .menuOpened .socials img {
   height: 24px;
+  transition: height 1s ease;
 }
 
 .connectWalletButton {
