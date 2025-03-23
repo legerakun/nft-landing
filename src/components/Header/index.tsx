@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { showBackgroundPosition } from "@/components/Header/config";
 import { Logo, LogoColors, LogoSizes } from "@/components/Logo";
+import { handleLogoSize } from "@/utils/handleLogoSize";
+import { Layout } from "@/config";
 
 import s from "./index.module.scss";
 
@@ -10,12 +12,24 @@ export const Header = () => {
   const [logoSize, setLogoSize] = useState(LogoSizes.BIG);
   const logoSizeRef = useRef(LogoSizes.BIG);
 
+  const resizeListenerCallback = useMemo(() => {
+    const sizes = {
+      [Layout.DESKTOP]: LogoSizes.BIG,
+      [Layout.TABLET]: LogoSizes.SMALL,
+      [Layout.MOBILE]: LogoSizes.MEDIUM,
+    };
+
+    return handleLogoSize(logoSizeRef, sizes, (newSize) => {
+      setLogoSize(newSize);
+    });
+  }, []);
+
   useEffect(() => {
-    const root = document.querySelector("#root");
-
-    if (!root) return;
-
     const scrollListenerCallback = () => {
+      const root = document.querySelector("#root");
+
+      if (!root) return;
+
       const { scrollTop } = root;
 
       setShowBackground(scrollTop > showBackgroundPosition);
@@ -23,32 +37,21 @@ export const Header = () => {
 
     scrollListenerCallback();
 
-    root.addEventListener("scroll", scrollListenerCallback);
+    const root = document.querySelector("#root");
 
-    const resizeListenerCallback = () => {
-      const { innerWidth } = window;
-
-      const handleLogoSize = (newLogoSize: LogoSizes) => {
-        if (logoSizeRef.current === newLogoSize) return;
-        logoSizeRef.current = newLogoSize;
-        setLogoSize(newLogoSize);
-      };
-
-      if (innerWidth > 1440) {
-        handleLogoSize(LogoSizes.BIG);
-      } else if (innerWidth > 1024) {
-        handleLogoSize(LogoSizes.SMALL);
-      } else if (innerWidth > 375) {
-        handleLogoSize(LogoSizes.MEDIUM);
-      }
-    };
+    if (root) {
+      root.addEventListener("scroll", scrollListenerCallback);
+    }
 
     resizeListenerCallback();
 
     window.addEventListener("resize", resizeListenerCallback);
 
     return () => {
-      root.removeEventListener("scroll", scrollListenerCallback);
+      if (root) {
+        root.removeEventListener("scroll", scrollListenerCallback);
+      }
+
       window.removeEventListener("rezise", resizeListenerCallback);
     };
   }, []);

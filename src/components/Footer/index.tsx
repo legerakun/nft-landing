@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
+import { handleImageSize } from "@/utils/handleImageSize";
+import { imagePath, ImageSizes, Layout } from "@/config";
+import { handleLogoSize } from "@/utils/handleLogoSize";
 import { Logo, LogoSizes } from "@/components/Logo";
-import { imagePath, ImageSizes } from "@/config";
 
 import s from "./index.module.scss";
 
@@ -34,38 +36,28 @@ export const Footer = () => {
   const logoSizeRef = useRef(LogoSizes.BIG);
   const imgRef = useRef(ImageSizes.DESKTOP);
 
-  useEffect(() => {
-    const root = document.querySelector("#root");
-
-    if (!root) return;
-
-    const resizeListenerCallback = () => {
-      const { innerWidth } = window;
-
-      const handleLogoSize = (newLogoSize: LogoSizes) => {
-        if (logoSizeRef.current === newLogoSize) return;
-        logoSizeRef.current = newLogoSize;
-        setLogoSize(newLogoSize);
-      };
-
-      const handleImageSize = (newImageSize: ImageSizes) => {
-        if (imgRef.current === newImageSize) return;
-        imgRef.current = newImageSize;
-        setSocialsImages(socialsSizes[newImageSize]);
-      };
-
-      if (innerWidth > 1440) {
-        handleLogoSize(LogoSizes.BIG);
-        handleImageSize(ImageSizes.DESKTOP);
-      } else if (innerWidth > 1024) {
-        handleLogoSize(LogoSizes.MEDIUM);
-        handleImageSize(ImageSizes.TABLET);
-      } else if (innerWidth > 375) {
-        handleLogoSize(LogoSizes.MEDIUM);
-        handleImageSize(ImageSizes.MOBILE);
-      }
+  const resizeListenerCallback = useMemo(() => {
+    const sizes = {
+      [Layout.DESKTOP]: LogoSizes.BIG,
+      [Layout.TABLET]: LogoSizes.MEDIUM,
+      [Layout.MOBILE]: LogoSizes.SMALL,
     };
 
+    const imageResize = handleImageSize(imgRef, (newSize) => {
+      setSocialsImages(socialsSizes[newSize]);
+    });
+
+    const logoResize = handleLogoSize(logoSizeRef, sizes, (newSize) => {
+      setLogoSize(newSize);
+    });
+
+    return () => {
+      imageResize();
+      logoResize();
+    };
+  }, []);
+
+  useEffect(() => {
     resizeListenerCallback();
 
     window.addEventListener("resize", resizeListenerCallback);
