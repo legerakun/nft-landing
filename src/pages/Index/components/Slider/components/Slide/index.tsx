@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import {
   maxNftTimer,
   minNftTimer,
 } from "@/pages/Index/components/Slider/config";
 import { converSecondsToTime } from "@/utils/converSecondsToTime";
-import { cryptoImages, CryptoTypes, ImageSizes } from "@/config";
-import { handleImageSize } from "@/utils/handleImageSize";
+import { cryptoImages, CryptoTypes, LayoutNames } from "@/config";
+import { LayoutContext } from "@/providers/LayoutProvider";
 import { getRandomInt } from "@/utils/getRandomInt";
 
 import s from "./index.module.scss";
@@ -26,23 +26,11 @@ export const Slide = ({
   cryptoType,
   href,
 }: SlideProps) => {
-  const cryptoImageSizes = cryptoImages[cryptoType];
+  const { layout } = useContext(LayoutContext);
   const [counter, setCounter] = useState(
     getRandomInt(minNftTimer, maxNftTimer)
   );
-  const [cryptoImage, setCryptoImage] = useState(
-    cryptoImageSizes[ImageSizes.DESKTOP]
-  );
   const counterRef = useRef<NodeJS.Timeout | null>(null);
-  const imgRef = useRef(ImageSizes.DESKTOP);
-
-  const resizeListenerCallback = useMemo(
-    () =>
-      handleImageSize(imgRef, (newSize) => {
-        setCryptoImage(cryptoImageSizes[newSize]);
-      }),
-    []
-  );
 
   useEffect(() => {
     if (counterRef.current) {
@@ -56,18 +44,16 @@ export const Slide = ({
     }, 1000);
 
     counterRef.current = counter;
-
-    resizeListenerCallback();
-
-    window.addEventListener("resize", resizeListenerCallback);
-
-    return () => {
-      window.removeEventListener("rezise", resizeListenerCallback);
-    };
   }, []);
 
   const handlePlaceBid = () => {
     console.log(`Navigate to ${href}`);
+  };
+
+  const cryptoImageSizes = {
+    [LayoutNames.DESKTOP]: "22px",
+    [LayoutNames.TABLET]: "16px",
+    [LayoutNames.MOBILE]: "16px",
   };
 
   return (
@@ -83,7 +69,14 @@ export const Slide = ({
         <div className={s.bid}>
           <h5>Current bid</h5>
           <div className={s.bidCard}>
-            <img src={cryptoImage} alt={`${cryptoType} image`} />
+            <img
+              style={{
+                width: cryptoImageSizes[layout],
+                height: cryptoImageSizes[layout],
+              }}
+              src={cryptoImages[cryptoType]}
+              alt={`${cryptoType} image`}
+            />
             <p>{bid}</p>
           </div>
         </div>

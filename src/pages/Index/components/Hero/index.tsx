@@ -1,55 +1,30 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { ImageOne } from "@/pages/Index/components/Hero/components/ImageOne";
 import { ImageTwo } from "@/pages/Index/components/Hero/components/ImageTwo";
 import { Buttons } from "@/pages/Index/components/Hero/components/Buttons";
 import { Metrics } from "@/pages/Index/components/Hero/components/Metrics";
 import { Text } from "@/pages/Index/components/Hero/components/Text";
-import { handleImageSize } from "@/utils/handleImageSize";
-import { imagePath, ImageSizes } from "@/config";
+import { LayoutContext } from "@/providers/LayoutProvider";
+import { imagePath, LayoutNames } from "@/config";
 
 import s from "./index.module.scss";
 
-const arrowSizes = {
-  [ImageSizes.DESKTOP]: `${imagePath}images/hero_arrow.svg`,
-  [ImageSizes.TABLET]: `${imagePath}images/hero_tablet_arrow.svg`,
-  [ImageSizes.MOBILE]: `${imagePath}images/hero_tablet_arrow.svg`,
-};
-
-const dotsSizes = {
-  [ImageSizes.DESKTOP]: `${imagePath}images/hero_dots.svg`,
-  [ImageSizes.TABLET]: `${imagePath}images/hero_tablet_dots.svg`,
-  [ImageSizes.MOBILE]: `${imagePath}images/hero_tablet_dots.svg`,
-};
-
 export const Hero = () => {
   const [showArrow, setShowArrow] = useState(false);
-  const [arrowImage, setArrowImage] = useState(arrowSizes[ImageSizes.DESKTOP]);
-  const [dotsImage, setDotsImage] = useState(dotsSizes[ImageSizes.DESKTOP]);
-  const imgRef = useRef(ImageSizes.DESKTOP);
-
-  const resizeListenerCallback = useMemo(
-    () =>
-      handleImageSize(imgRef, (newSize) => {
-        setArrowImage(arrowSizes[newSize]);
-        setDotsImage(dotsSizes[newSize]);
-      }),
-    []
-  );
+  const { layout } = useContext(LayoutContext);
 
   useEffect(() => {
     setTimeout(() => {
       setShowArrow(true);
     }, 1300);
-
-    resizeListenerCallback();
-
-    window.addEventListener("resize", resizeListenerCallback);
-
-    return () => {
-      window.removeEventListener("rezise", resizeListenerCallback);
-    };
   }, []);
+
+  const arrowSizes = {
+    [LayoutNames.DESKTOP]: { width: "128.78px", height: "124.22px" },
+    [LayoutNames.TABLET]: { width: "91.59px", height: "88.34px" },
+    [LayoutNames.MOBILE]: { width: "58.79px", height: "56.71px" },
+  };
 
   return (
     <section className={s.hero}>
@@ -58,11 +33,19 @@ export const Hero = () => {
       <Buttons />
       <Metrics />
       <img
+        style={{
+          width: arrowSizes[layout].width,
+          height: arrowSizes[layout].height,
+        }}
         className={`${s.arrow} ${showArrow ? s.arrowShow : ""}`.trim()}
-        src={arrowImage}
+        src={`${imagePath}icons/hero/HeroArrow.svg`}
         alt="Arrow"
       />
-      <img className={s.dots} src={dotsImage} alt="Dots" />
+      <img
+        className={s.dots}
+        src={`${imagePath}icons/hero/HeroDots.svg`}
+        alt="Dots"
+      />
       <ImageOne />
       <ImageTwo />
     </section>

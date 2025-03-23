@@ -12,16 +12,8 @@ export enum LayoutNames {
 }
 
 export const cryptoImages = {
-  [CryptoTypes.BTC]: {
-    [ImageSizes.DESKTOP]: "",
-    [ImageSizes.TABLET]: "",
-    [ImageSizes.MOBILE]: "",
-  },
-  [CryptoTypes.ETH]: {
-    [ImageSizes.DESKTOP]: `${imagePath}images/ethereum.svg`,
-    [ImageSizes.TABLET]: `${imagePath}images/tablet_ethereum.svg`,
-    [ImageSizes.MOBILE]: `${imagePath}images/tablet_ethereum.svg`,
-  },
+  [CryptoTypes.BTC]: "",
+  [CryptoTypes.ETH]: `${imagePath}images-crypto/Ethereum.svg`,
 };
 
 export const LayoutSizes = {

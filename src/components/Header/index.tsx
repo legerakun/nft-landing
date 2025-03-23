@@ -1,35 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
+import { HeaderDesktopAndTablet } from "@/components/Header/components/HeaderDesktopAndTablet";
+import { HeaderMobile } from "@/components/Header/components/HeaderMobile";
 import { showBackgroundPosition } from "@/components/Header/config";
-import { Logo, LogoColors, LogoSizes } from "@/components/Logo";
-import { handleLogoSize } from "@/utils/handleLogoSize";
-import { Layout } from "@/config";
-
-import s from "./index.module.scss";
+import { LayoutContext } from "@/providers/LayoutProvider";
+import { LogoSizes } from "@/components/Logo";
+import { LayoutNames } from "@/config";
 
 export const Header = () => {
   const [showBackground, setShowBackground] = useState(false);
-  const [logoSize, setLogoSize] = useState(LogoSizes.BIG);
-  const logoSizeRef = useRef(LogoSizes.BIG);
-
-  const resizeListenerCallback = useMemo(() => {
-    const sizes = {
-      [Layout.DESKTOP]: LogoSizes.BIG,
-      [Layout.TABLET]: LogoSizes.SMALL,
-      [Layout.MOBILE]: LogoSizes.MEDIUM,
-    };
-
-    return handleLogoSize(logoSizeRef, sizes, (newSize) => {
-      setLogoSize(newSize);
-    });
-  }, []);
+  const { layout } = useContext(LayoutContext);
 
   useEffect(() => {
+    const root = document.querySelector("#root");
+
+    if (!root) return;
+
     const scrollListenerCallback = () => {
-      const root = document.querySelector("#root");
-
-      if (!root) return;
-
       const { scrollTop } = root;
 
       setShowBackground(scrollTop > showBackgroundPosition);
@@ -37,39 +24,29 @@ export const Header = () => {
 
     scrollListenerCallback();
 
-    const root = document.querySelector("#root");
-
-    if (root) {
-      root.addEventListener("scroll", scrollListenerCallback);
-    }
-
-    resizeListenerCallback();
-
-    window.addEventListener("resize", resizeListenerCallback);
+    root.addEventListener("scroll", scrollListenerCallback);
 
     return () => {
-      if (root) {
-        root.removeEventListener("scroll", scrollListenerCallback);
-      }
-
-      window.removeEventListener("rezise", resizeListenerCallback);
+      root.removeEventListener("scroll", scrollListenerCallback);
     };
   }, []);
 
+  const logoSizes = {
+    [LayoutNames.DESKTOP]: LogoSizes.BIG,
+    [LayoutNames.TABLET]: LogoSizes.SMALL,
+    [LayoutNames.MOBILE]: LogoSizes.MEDIUM,
+  };
+
   return (
-    <header
-      className={`${s.header} ${showBackground ? s.showBackground : ""}`.trim()}
-    >
-      <button className={s.logoLink}>
-        <Logo size={logoSize} color={LogoColors.CONTRAST} />
-      </button>
-      <div className={s.links}>
-        <button>discover</button>
-        <button>creators</button>
-        <button>sell</button>
-        <button>stats</button>
-      </div>
-      <button className={s.connectWalletButton}>connect wallet</button>
-    </header>
+    <>
+      {layout === LayoutNames.MOBILE ? (
+        <HeaderMobile />
+      ) : (
+        <HeaderDesktopAndTablet
+          showBackground={showBackground}
+          logoSize={logoSizes[layout]}
+        />
+      )}
+    </>
   );
 };

@@ -1,8 +1,8 @@
-import { RefObject, useEffect, useMemo, useRef, useState } from "react";
+import { RefObject, useContext } from "react";
 import { SwiperRef } from "swiper/react";
 
-import { handleImageSize } from "@/utils/handleImageSize";
-import { imagePath, ImageSizes } from "@/config";
+import { LayoutContext } from "@/providers/LayoutProvider";
+import { imagePath, LayoutNames } from "@/config";
 
 import s from "./index.module.scss";
 
@@ -10,33 +10,8 @@ type SliderControllerProps = {
   swiperRef: RefObject<SwiperRef | null>;
 };
 
-const arrowSizes = {
-  [ImageSizes.DESKTOP]: `${imagePath}images/ArrowLeft.svg`,
-  [ImageSizes.TABLET]: `${imagePath}images/ArrowLeftTablet.svg`,
-  [ImageSizes.MOBILE]: `${imagePath}images/ArrowLeftTablet.svg`,
-};
-
 export const SliderController = ({ swiperRef }: SliderControllerProps) => {
-  const [arrowImage, setArrowImage] = useState(arrowSizes[ImageSizes.DESKTOP]);
-  const imgRef = useRef(ImageSizes.DESKTOP);
-
-  const resizeListenerCallback = useMemo(
-    () =>
-      handleImageSize(imgRef, (newSize) => {
-        setArrowImage(arrowSizes[newSize]);
-      }),
-    []
-  );
-
-  useEffect(() => {
-    resizeListenerCallback();
-
-    window.addEventListener("resize", resizeListenerCallback);
-
-    return () => {
-      window.removeEventListener("rezise", resizeListenerCallback);
-    };
-  }, []);
+  const { layout } = useContext(LayoutContext);
 
   const handlePrev = () => {
     if (!swiperRef.current) return;
@@ -50,14 +25,30 @@ export const SliderController = ({ swiperRef }: SliderControllerProps) => {
     swiperRef.current.swiper.slideNext();
   };
 
+  const arrowSizes = {
+    [LayoutNames.DESKTOP]: "24px",
+    [LayoutNames.TABLET]: "18px",
+    [LayoutNames.MOBILE]: "18px",
+  };
+
+  const imageSrc = `${imagePath}icons/ArrowLeft.svg`;
+
   return (
     <div className={s.sliderController}>
       <button className={s.left} onClick={handlePrev}>
-        <img src={arrowImage} alt="Swipe left" />
+        <img
+          style={{ width: arrowSizes[layout], height: arrowSizes[layout] }}
+          src={imageSrc}
+          alt="Swipe left"
+        />
       </button>
       <hr className={s.hr} />
       <button className={s.right} onClick={handleNext}>
-        <img src={arrowImage} alt="Swipe left" />
+        <img
+          style={{ width: arrowSizes[layout], height: arrowSizes[layout] }}
+          src={imageSrc}
+          alt="Swipe left"
+        />
       </button>
     </div>
   );
