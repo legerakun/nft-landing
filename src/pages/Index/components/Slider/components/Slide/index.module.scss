@@ -1,5 +1,8 @@
 @use "@/globals.scss" as *;
 
+$slide-shadow: 28.5px 9px 45px 0px #c7c7c799;
+$slide-tablet-shadow: 28.5px 9px 45px 0px #c7c7c799;
+
 $slide-padding: 14px;
 $slide-tablet-padding: 10px;
 
@@ -17,7 +20,7 @@ $timer-tablet-padding-y: 10px;
   gap: 20px;
   border-radius: 24px;
   padding: $slide-padding;
-  box-shadow: 38px 12px 60px 0px #c7c7c799;
+  box-shadow: $slide-shadow;
   background: white;
 
   @media screen and (max-width: 1440px) {
@@ -27,7 +30,11 @@ $timer-tablet-padding-y: 10px;
     border-radius: 18px;
     gap: 14px;
     padding: $slide-tablet-padding;
-    box-shadow: 28.5px 9px 45px 0px #c7c7c799;
+    box-shadow: $slide-tablet-shadow;
+  }
+
+  @media screen and (max-width: 1024px) {
+    margin: 0px -30px;
   }
 }
 
@@ -164,6 +171,16 @@ $timer-tablet-padding-y: 10px;
 
   @media screen and (max-width: 1440px) {
     gap: 3px;
+  }
+}
+
+.bidCard img {
+  width: 22px;
+  height: 22px;
+
+  @media screen and (max-width: 1440px) {
+    width: 16px;
+    height: 16px;
   }
 }
 

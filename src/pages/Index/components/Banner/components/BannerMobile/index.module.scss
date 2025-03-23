@@ -1,0 +1,121 @@
+@use "@/globals.scss" as *;
+
+$mobile-width: 315px;
+
+$mobile-header-width: 254px;
+
+$mobile-description-width: 131px;
+
+$mobile-buttons-width: 196.54112243652344px;
+
+$mobile-image-width: 251px;
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 534px;
+  border-radius: 14.87px;
+}
+
+.bannerPanel {
+  position: absolute;
+  width: $mobile-width;
+  height: 211px;
+  top: 70px;
+  left: calc(50% - $mobile-width / 2);
+  border-radius: 14.87px;
+  background: $color-contrast;
+}
+
+.header {
+  position: absolute;
+  width: $mobile-header-width;
+  height: 24px;
+  top: 22px;
+  left: calc(50% - $mobile-header-width / 2);
+  font-family: $font-poppins;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 1%;
+  text-align: center;
+  color: white;
+}
+
+.description {
+  position: absolute;
+  width: $mobile-description-width;
+  height: 13px;
+  top: 55px;
+  left: calc(50% - $mobile-description-width/2);
+  opacity: 0.6;
+  font-family: $font-poppins;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 130%;
+  letter-spacing: 1%;
+  color: #d4d4d4;
+  text-align: center;
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 90px;
+  left: calc(50% - $mobile-buttons-width / 2);
+  width: $mobile-buttons-width;
+  height: 33.529109954833984px;
+  gap: 14px;
+}
+
+.buttons button {
+  width: 91px;
+  height: 34px;
+  border-radius: 6.05px;
+  font-family: $font-outfit;
+  font-weight: 600;
+  font-size: 10.58px;
+  line-height: 130%;
+  letter-spacing: 1%;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.firstButton {
+  color: $color-contrast;
+  background: white;
+}
+
+.firstButton:hover {
+  color: dark;
+  background: $color-contrast-second;
+}
+
+.secondButton {
+  color: white;
+  border: 2px solid #ffffff;
+}
+
+.secondButton:hover {
+  color: black;
+  background: $color-contrast-second;
+}
+
+.backImage {
+  position: absolute;
+  width: $mobile-image-width;
+  height: 130px;
+  top: 173px;
+  left: calc(50% - $mobile-image-width / 2);
+  border-radius: 9.2px;
+  filter: blur(30.808229446411133px);
+}
+
+.image {
+  position: absolute;
+  width: $mobile-image-width;
+  height: 130px;
+  top: 165px;
+  left: calc(50% - $mobile-image-width / 2);
+  border-radius: 9.2px;
+}

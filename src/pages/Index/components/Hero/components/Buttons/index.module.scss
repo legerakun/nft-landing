@@ -1,5 +1,7 @@
 @use "@/globals.scss" as *;
 
+$mobile-width: 244px;
+
 .buttons {
   position: absolute;
   display: flex;
@@ -9,11 +11,18 @@
   left: 97px;
   opacity: 0;
   transition: opacity 1s ease;
-  
+
   @media screen and (max-width: 1440px) {
     gap: 16px;
     top: 281px;
     left: 67px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    gap: 17px;
+    top: 306.41;
+    left: calc(50% - $mobile-width / 2);
+    width: $mobile-width;
   }
 }
 
@@ -45,7 +54,7 @@
   padding: 18px 29px;
   color: white;
   background: black;
-  
+
   @media screen and (max-width: 1440px) {
     width: 130px;
     height: 42px;
@@ -69,7 +78,7 @@
   padding: 18px 21px;
   border: 2px solid black;
   color: black;
-  
+
   @media screen and (max-width: 1440px) {
     width: 103px;
     height: 42px;

@@ -34,18 +34,24 @@ export const Slider = () => {
           enabled: true,
         }}
         breakpoints={{
-          375: {
+          0: {
             spaceBetween: 0,
+            slidesPerView: 1
+          },
+          375: {
+            spaceBetween: 120,
+            slidesPerView: 2
           },
           1024: {
             spaceBetween: -62,
+            slidesPerView: 4
           },
           1440: {
             spaceBetween: -162,
+            slidesPerView: 4
           },
         }}
         centeredSlides
-        slidesPerView={4}
         loop={true}
       >
         {slides}

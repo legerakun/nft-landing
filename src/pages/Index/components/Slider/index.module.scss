@@ -2,6 +2,7 @@
 
 $slider-padding: 70px;
 $slider-tablet-padding: 50px;
+$slider-mobile-padding: 50px;
 
 .slider {
   display: flex;
@@ -15,6 +16,12 @@ $slider-tablet-padding: 50px;
     height: calc(578px - 2 * $slider-tablet-padding);
     padding: $slider-tablet-padding 0px;
     gap: $slider-tablet-padding;
+  }
+
+  @media screen and (max-width: 1440px) {
+    height: calc(572px - 2 * $slider-mobile-padding);
+    padding: $slider-mobile-padding 0px;
+    gap: $slider-mobile-padding;
   }
 }
 
@@ -33,6 +40,11 @@ $slider-tablet-padding: 50px;
     font-size: 32px;
     line-height: 36px;
   }
+
+  @media screen and (max-width: 1440px) {
+    font-size: 30px;
+    line-height: 30px;
+  }
 }
 
 .swiper {
@@ -43,5 +55,10 @@ $slider-tablet-padding: 50px;
   @media screen and (max-width: 1440px) {
     height: 294px;
     padding: $slider-tablet-padding;
+  }
+
+  @media screen and (max-width: 1024px) {
+    height: 294px;
+    padding: $slider-mobile-padding;
   }
 }

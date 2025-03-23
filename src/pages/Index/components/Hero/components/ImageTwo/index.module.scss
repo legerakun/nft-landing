@@ -2,11 +2,15 @@ $image-width: 320px;
 $image-height: 322px;
 $image-tablet-width: 230px;
 $image-tablet-height: 230px;
+$image-mobile-width: 170px;
+$image-mobile-height: 170px;
 
 $back-image-width: 315px;
 $back-image-height: 318px;
 $back-tablet-image-width: 230px;
 $back-tablet-image-height: 230px;
+$back-mobile-image-width: 170px;
+$back-mobile-image-height: 170px;
 
 .imageTwo {
   position: absolute;
@@ -22,10 +26,20 @@ $back-tablet-image-height: 230px;
     width: $image-tablet-width;
     right: calc(0px - $image-tablet-width);
   }
+
+  @media screen and (max-width: 1024px) {
+    top: 552px;
+    width: $image-mobile-width;
+    right: calc(0px - $image-mobile-width);
+  }
 }
 
 .inPosition {
   right: -24px;
+
+  @media screen and (max-width: 1024px) {
+    right: -55px;
+  }
 }
 
 .backImage {
@@ -45,6 +59,13 @@ $back-tablet-image-height: 230px;
     min-width: $back-tablet-image-width;
     min-height: $back-tablet-image-height;
   }
+
+  @media screen and (max-width: 1024px) {
+    width: $back-mobile-image-width;
+    height: $back-mobile-image-height;
+    min-width: $back-mobile-image-width;
+    min-height: $back-mobile-image-height;
+  }
 }
 
 .image {
@@ -63,5 +84,13 @@ $back-tablet-image-height: 230px;
     min-width: $back-tablet-image-width;
     min-height: $back-tablet-image-height;
     border-radius: 16px;
+  }
+
+  @media screen and (max-width: 1440px) {
+    width: $back-mobile-image-width;
+    height: $back-mobile-image-height;
+    min-width: $back-mobile-image-width;
+    min-height: $back-mobile-image-height;
+    border-radius: 11.92px;
   }
 }

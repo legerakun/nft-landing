@@ -5,12 +5,10 @@ import { Footer } from "@/components/Footer";
 
 import s from "./index.module.scss";
 
-export const LandingLayout = () => {
-  return (
-    <div className={s.container}>
-      <Header />
-      <main className={s.main}>{<Outlet />}</main>
-      <Footer />
-    </div>
-  );
-};
+export const LandingLayout = () => (
+  <div className={s.container}>
+    <Header />
+    <main className={s.main}>{<Outlet />}</main>
+    <Footer />
+  </div>
+);

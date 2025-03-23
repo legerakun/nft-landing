@@ -1,0 +1,85 @@
+@use "@/globals.scss" as *;
+
+$padding-top: 52px;
+$padding-bottom: 40px;
+
+.footer {
+  padding: $padding-top 24px $padding-bottom 24px;
+  height: calc($footer-mobile-height - $padding-top - $padding-bottom);
+  background: $color-contrast;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.logo p {
+  font-family: $font-poppins;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: white;
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.socials img {
+  width: 17px;
+  height: 17px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: fit-content;
+  height: fit-content;
+  gap: 30px;
+  margin-bottom: 48px;
+}
+
+.buttons button {
+  font-family: $font-inter;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18.88px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: $color-gray;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #818181;
+  margin-bottom: 26px;
+  opacity: 0.25;
+}
+
+.rights {
+  width: 100%;
+  text-align: center;
+  font-family: $font-inter;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: $color-gray-dark;
+}

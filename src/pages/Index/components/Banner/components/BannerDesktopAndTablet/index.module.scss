@@ -4,12 +4,16 @@ $banner-padding-x: 120px;
 $banner-padding-y: 97px;
 $banner-tablet-padding-x: 90px;
 $banner-tablet-padding-y: 67px;
+$banner-mobile-padding-x: 90px;
+$banner-mobile-padding-y: 67px;
 
 $banner-panel-padding: 31px;
 $banner-tablet-panel-padding: 23px;
+$banner-mobile-panel-padding: 23px;
 
 $aside-padding: 17px;
 $aside-tablet-padding: 12.75px;
+$aside-mobile-padding: 12.75px;
 
 .banner {
   width: calc(100% - 2 * $banner-padding-y);
@@ -20,6 +24,12 @@ $aside-tablet-padding: 12.75px;
     width: calc(100% - 2 * $banner-tablet-padding-y);
     height: calc(413px - 2 * $banner-tablet-padding-x);
     padding: $banner-tablet-padding-x $banner-tablet-padding-y;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: calc(315px - 2 * $banner-mobile-padding-y);
+    height: calc(302px - 2 * $banner-mobile-padding-x);
+    padding: $banner-mobile-padding-x $banner-mobile-padding-y;
   }
 }
 

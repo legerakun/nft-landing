@@ -1,0 +1,113 @@
+@use "@/globals.scss" as *;
+
+$menu-padding-x: 30px;
+$menu-padding-y: 40px;
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  position: fixed;
+  top: $header-mobile-height;
+  left: 0;
+  width: calc(100% - 2 * $menu-padding-x);
+  padding: 0px $menu-padding-x;
+  height: 0%;
+  background: $color-main;
+  transition: height 1s ease;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 0px;
+  opacity: 0;
+  transition: opacity 1s ease, height 1s ease;
+}
+
+.navigation li {
+  height: 0%;
+  opacity: 0;
+  transition: opacity 1s ease, height 1s ease;
+}
+
+.navigation button {
+  font-family: $font-inter;
+  font-weight: 500;
+  font-size: 0px;
+  line-height: 0px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: $color-gray-heavy;
+  transition: opacity 1s ease, height 1s ease, font-size 1s ease, line-height 1s ease;
+}
+
+.menuOpened {
+  padding: $menu-padding-y $menu-padding-x;
+  height: calc(100% - $header-mobile-height - $menu-padding-y * 2);
+}
+
+.menuOpened .navigation {
+  height: 228px;
+  opacity: 1;
+}
+
+.menuOpened .navigation li {
+  height: 42px;
+  opacity: 1;
+}
+
+.menuOpened .navigation button {
+  font-size: 40px;
+  line-height: 42px;
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+  height: 0px;
+  opacity: 0;
+  transition: opacity 1s ease, height 1s ease;
+}
+
+.socials img {
+  height: 0px;
+  transition: opacity 1s ease, height 1s ease;
+}
+
+.menuOpened .socials {
+  height: 24px;
+  opacity: 1;
+}
+
+.menuOpened .socials img {
+  height: 24px;
+}
+
+.connectWalletButton {
+  margin-top: auto;
+  width: 100%;
+  height: 0px;
+  border-radius: 15px;
+  background: $color-contrast;
+  font-family: $font-inter;
+  font-weight: 600;
+  font-size: 0px;
+  line-height: 0px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: white;
+  opacity: 0;
+  transition: opacity 1s ease, height 1s ease;
+}
+
+.menuOpened .connectWalletButton {
+  opacity: 1;
+  height: 60px;
+  font-size: 20px;
+  line-height: 22px;
+}

@@ -1,0 +1,57 @@
+@use "@/globals.scss" as *;
+
+$header-padding: 30px;
+
+.header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: calc(100% - 2 * $header-padding);
+  height: calc($header-mobile-height - 2 * $header-padding);
+  padding: $header-padding;
+  background: $color-main;
+  z-index: 1;
+}
+
+.header:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: $header-padding;
+  height: 1px;
+  width: calc(100% - 2 * $header-padding);
+  border-bottom: solid 0.5px #cbcbcb;
+}
+
+.logo {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.logo p {
+  font-family: $font-poppins;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: black;
+}
+
+.menuButton {
+  width: fit-content;
+  height: fit-content;
+}
+
+.menuButton svg {
+  width: 40px;
+  height: 40px;
+}

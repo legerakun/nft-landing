@@ -20,13 +20,20 @@ h4,
 h5,
 button,
 hr,
+menu,
+ul,
+li,
 p {
   margin: 0;
+  padding: 0;
 }
 
 button {
-  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
 }
